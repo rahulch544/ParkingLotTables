@@ -14,9 +14,7 @@ public class SlotId implements Serializable {
 
 	private Integer slot_no;
 
-    private Integer floor_no;
-
-    private Integer parkinglot_id;
+    private ParkingFloor parkingFloor;
 
 
     @Override
