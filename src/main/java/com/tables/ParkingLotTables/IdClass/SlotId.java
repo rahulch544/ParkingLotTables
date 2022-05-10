@@ -3,11 +3,20 @@ package com.tables.ParkingLotTables.IdClass;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.tables.ParkingLotTables.Model.ParkingFloor;
+
 public class SlotId implements Serializable {
 
-    private Integer slot_no;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer slot_no;
 
     private Integer floor_no;
+
+    private Integer parkinglot_id;
 
 
     @Override
@@ -17,39 +26,23 @@ public class SlotId implements Serializable {
         if (!(o instanceof SlotId)) {
             return false;
         }
-        SlotId slot_id = (SlotId) o;
-        return Objects.equals(slot_no, slot_id.slot_no) && Objects.equals(floor_no, slot_id.floor_no);
+        SlotId slotId = (SlotId) o;
+        return Objects.equals(slot_no, slotId.slot_no) && Objects.equals(parkingFloor, slotId.parkingFloor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(slot_no, floor_no);
+        return Objects.hash(slot_no, parkingFloor);
     }
-
-    public SlotId(Integer slot_no, Integer floor_no) {
-        this.slot_no = slot_no;
-        this.floor_no = floor_no;
-    }
-
 
     public SlotId() {
     }
 
-    public Integer getSlot_no() {
-        return this.slot_no;
-    }
 
-    public void setSlot_no(Integer slot_no) {
+    public SlotId(Integer slot_no, ParkingFloor parkingFloor) {
         this.slot_no = slot_no;
+        this.parkingFloor = parkingFloor;
     }
-
-    public Integer getFloor_no() {
-        return this.floor_no;
-    }
-
-    public void setFloor_no(Integer floor_no) {
-        this.floor_no = floor_no;
-    }
-
+ 
     
 }

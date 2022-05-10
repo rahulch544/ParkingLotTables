@@ -2,8 +2,10 @@ package com.tables.ParkingLotTables.controller;
 
 import java.util.List;
 
+import com.tables.ParkingLotTables.Model.ParkingFloor;
 import com.tables.ParkingLotTables.Model.ParkingSlot;
 import com.tables.ParkingLotTables.Model.Vehicle;
+import com.tables.ParkingLotTables.service.ParkingFloorService;
 import com.tables.ParkingLotTables.service.ParkingSlotService;
 import com.tables.ParkingLotTables.service.VehicleService;
 
@@ -23,6 +25,9 @@ public class ParkingLotTablesController {
 
 	@Autowired
 	private ParkingSlotService parkingSlotService;
+
+	@Autowired
+	private ParkingFloorService parkingFloorService;
 	
 	@RequestMapping(value ="info", method = RequestMethod.GET)
 	public String info() {
@@ -50,4 +55,13 @@ public class ParkingLotTablesController {
 		return parkingSlotService.getParkingSlots();
 	}
 
+	@PostMapping("/addParkingFloor")
+	public String addParkingFoor(@RequestBody ParkingFloor parkingFloor) {
+		return parkingFloorService.addParkingFloor(parkingFloor);
+	}
+
+	@GetMapping("/getParkingFloors")
+	public List<ParkingFloor> getParkingFoors() {
+		return parkingFloorService.getParkingFloors();
+	}
 }
