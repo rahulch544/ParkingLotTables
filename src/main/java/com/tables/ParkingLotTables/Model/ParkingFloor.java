@@ -1,11 +1,15 @@
 package com.tables.ParkingLotTables.Model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 
 import com.tables.ParkingLotTables.IdClass.ParkingFloorId;
@@ -41,8 +45,12 @@ public class ParkingFloor {
 
     private Integer exits;
 
-    @OneToMany(mappedBy = "parkingFloor", cascade = CascadeType.ALL)
-    private Set<ParkingSlot> parkingSlot;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumns({
+        @JoinColumn(name="FLOOR_NO"),
+        @JoinColumn(name="PARKINGLOT_ID")
+    })
+    private List<ParkingSlot> parkingSlot;
 
 
 
@@ -94,11 +102,11 @@ public class ParkingFloor {
         this.exits = exits;
     }
 
-    public Set<ParkingSlot> getParkingSlot() {
+    public List<ParkingSlot> getParkingSlot() {
         return this.parkingSlot;
     }
 
-    public void setParkingSlot(Set<ParkingSlot> parkingSlot) {
+    public void setParkingSlot(List<ParkingSlot> parkingSlot) {
         this.parkingSlot = parkingSlot;
     }
 

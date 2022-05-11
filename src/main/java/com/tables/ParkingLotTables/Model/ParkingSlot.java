@@ -1,15 +1,13 @@
 package com.tables.ParkingLotTables.Model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 import com.tables.ParkingLotTables.IdClass.SlotId;
 // Table slot as s {
@@ -23,19 +21,21 @@ import com.tables.ParkingLotTables.IdClass.SlotId;
 public class ParkingSlot {
     
     @Id
+    @Column(name ="SLOT_NO")
     private Integer slot_no;
 
     @Id
-    @ManyToOne
-    @JoinColumns({
-        @JoinColumn(name="SLOT_FLOOR", referencedColumnName="FLOOR_NO"),
-        @JoinColumn(name="SLOT_LOT_ID", referencedColumnName="PARKINGLOT_ID")
-    })
-    private ParkingFloor parkingFloor;
+    @Column(name ="FLOOR_NO")
+    private Integer floor_no;
+
+    @Id
+    @Column(name ="PARKINGLOT_ID")
+    private Integer parkinglot_id;
 
     @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name="vehicle_no" , referencedColumnName ="regd_no")
     private Vehicle vehicle;
+
 
 
     public Integer getSlot_no() {
@@ -46,12 +46,20 @@ public class ParkingSlot {
         this.slot_no = slot_no;
     }
 
-    public ParkingFloor getParkingFloor() {
-        return this.parkingFloor;
+    public Integer getFloor_no() {
+        return this.floor_no;
     }
 
-    public void setParkingFloor(ParkingFloor parkingFloor) {
-        this.parkingFloor = parkingFloor;
+    public void setFloor_no(Integer floor_no) {
+        this.floor_no = floor_no;
+    }
+
+    public Integer getParkinglot_id() {
+        return this.parkinglot_id;
+    }
+
+    public void setParkinglot_id(Integer parkinglot_id) {
+        this.parkinglot_id = parkinglot_id;
     }
 
     public Vehicle getVehicle() {
@@ -63,23 +71,26 @@ public class ParkingSlot {
     }
 
 
+    public ParkingSlot() {
+    }
+
+
+    public ParkingSlot(Integer slot_no, Integer floor_no, Integer parkinglot_id, Vehicle vehicle) {
+        this.slot_no = slot_no;
+        this.floor_no = floor_no;
+        this.parkinglot_id = parkinglot_id;
+        this.vehicle = vehicle;
+    }
+
     @Override
     public String toString() {
         return "{" +
             " slot_no='" + getSlot_no() + "'" +
-            ", parkingFloor='" + getParkingFloor() + "'" +
+            ", floor_no='" + getFloor_no() + "'" +
+            ", parkinglot_id='" + getParkinglot_id() + "'" +
             ", vehicle='" + getVehicle() + "'" +
             "}";
     }
-
-
-    public ParkingSlot() {
-    }
-
-    public ParkingSlot(Integer slot_no, ParkingFloor parkingFloor, Vehicle vehicle) {
-        this.slot_no = slot_no;
-        this.parkingFloor = parkingFloor;
-        this.vehicle = vehicle;
-    }
+  
 
 }   

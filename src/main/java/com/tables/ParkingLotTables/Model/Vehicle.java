@@ -16,7 +16,7 @@ import javax.persistence.Id;
 public class Vehicle {
 	
 	@Id
-	@Column(name="regd_no")
+	@Column(name="regd_no",unique=true)
 	private String regd_no;
 	
 	@Column

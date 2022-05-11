@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.tables.ParkingLotTables.Model.ParkingFloor;
 import com.tables.ParkingLotTables.Model.ParkingSlot;
+import com.tables.ParkingLotTables.Model.Parkinglot;
 import com.tables.ParkingLotTables.Model.Vehicle;
 import com.tables.ParkingLotTables.service.ParkingFloorService;
 import com.tables.ParkingLotTables.service.ParkingSlotService;
+import com.tables.ParkingLotTables.service.ParkinglotService;
 import com.tables.ParkingLotTables.service.VehicleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class ParkingLotTablesController {
 
 	@Autowired
 	private ParkingFloorService parkingFloorService;
+
+	@Autowired
+	private ParkinglotService parkinglotService;
 	
 	@RequestMapping(value ="info", method = RequestMethod.GET)
 	public String info() {
@@ -63,5 +68,15 @@ public class ParkingLotTablesController {
 	@GetMapping("/getParkingFloors")
 	public List<ParkingFloor> getParkingFoors() {
 		return parkingFloorService.getParkingFloors();
+	}
+
+	@PostMapping("/addParkinglot")
+	public String addParkingLot(@RequestBody Parkinglot parkinglot) {
+		return parkinglotService.addParkinglot(parkinglot);
+	}
+	
+	@GetMapping("/getParkinglots")
+	public List<Parkinglot> getParkinglots() {
+		return parkinglotService.getParkinglots();
 	}
 }
